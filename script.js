@@ -311,7 +311,7 @@ function takAttendanceAbsent(index) {
 }
 //to empty studentsList when click on clear button
 function emptyArray() {
-  studentsList.splice(0, studentsList.length);
+  studentsList.splice(1, studentsList.length-1);
   renderList();
 }
 //reset all attendance state to none when click on Reset attendance button
