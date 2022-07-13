@@ -122,7 +122,7 @@ function renderList() {
   for (let i = 0; i <= studentsList.length; i++) {
     let newItm = "";
     //the predefined list-->
-    if (studentsList.length === 1) {
+    if (studentsList.length === 1 || studentsList.length === 0) {
       for (let j = 0; j < 7; j++) {
         const student = {
           id: generateRandom(181000, 211999),
