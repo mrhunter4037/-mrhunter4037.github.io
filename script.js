@@ -6,6 +6,7 @@ if (localStorage.students.length > 1) {
 /*random names for the predefined list*/
 let randomNames = ['Liam', 'Noah', 'Oliver', 'Elijah', 'James',
   'William', 'Benj', 'Lucas', 'Henry', 'Theodore'];
+renderList();
 
 //Date part
 let day = document.getElementById("day");
