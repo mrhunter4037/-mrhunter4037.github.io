@@ -120,7 +120,7 @@ function renderList() {
   let pCount = 0; //statistics counters
   let aCount = 0;
   let lCount = 0;
-  for (let i = 0; i <= studentsList.length; i++) {
+  for (let i = 0; i < studentsList.length; i++) {
     let newItm = "";
     //the predefined list-->
     if (studentsList.length === 0) {
