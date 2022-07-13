@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Attendance</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="renderList()" id="body">
+  <div class="day" id="day"></div>
+  <div class="tableWrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Num</th>
+          <th>Student ID</th>
+          <th id="st-name">student Name</th>
+          <th colspan="3">Attendance</th>
+        </tr>
+      </thead>
+      <tbody id="tb"></tbody>
+      <tfoot id="tf">
+        <tr>
+          <th colspan="3">Statistics</th>
+          <th>0</th>
+          <th>0</th>
+          <th>0</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <div class="button-wrapper">
+    <div name="add-btn" id="add-btn" value="Add Student" onclick="showForm()" class="btn">Add Student
+    </div>
+    <div name="save-btn" id="save-btn" value="Save" class="btn" onclick="saveData()">Save</div>
+    <div onclick="emptyArray()" class="btn">Clear</div>
+    <div onclick="resetAttendance()" class="btn">Reset Attendance</div>
+  </div>
+  <div class="popup-wrapper" id="popup-wrapper">
+    <div class="inner-wrapper">
+      <p class="form-title">Add New Student</p>
+      <form method="post" class="popup-form" action="index.html">
+        <div class="inp">
+          <label for="student-id">Student ID </label>
+          <input type="number" name="student-id" id="student-id" value="">
+        </div>
+        <div class="inp">
+          <label for="student-first-name">First Name</label>
+          <input type="text" name="student-first-name" id="student-first-name" value="">
+        </div>
+        <div class="inp">
+          <label for="student-last-name">Last Name</label>
+          <input type="text" name="student-last-name" id="student-last-name" value="">
+        </div>
+        <div class="inp" id="inp">
+          <input type="button" name="form-sub-btn" id="form-sub-btn" value="Save" onclick="addRecord()" class="btn">
+          <input type="button" name="form-clr-btn" id="form-clr-btn" value="Clear" class="btn" onclick="clearFields()">
+        </div>
+      </form>
+      <div class="close-btn" id="close-btn" onclick="hideForm()">
+        &#10060;
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
