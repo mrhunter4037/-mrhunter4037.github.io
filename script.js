@@ -123,7 +123,7 @@ function renderList() {
   for (let i = 0; i < studentsList.length; i++) {
     let newItm = "";
     //the predefined list-->
-    if (studentsList.length === 0) {
+    if (studentsList.length <= 1) {
       for (let i = 0; i < 7; i++) {
         const student = { id: 123, firstName: "ahmad", lastName: "saeed", attendance: "none" };
         student.id = generateRandom(181000, 211999);
