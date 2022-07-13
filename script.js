@@ -1,5 +1,5 @@
 let studentsList = [{ id: 123, firstName: "ahmad", lastName: "saeed", attendance: "none" }];
-if (localStorage.students.length > 1) {
+if (localStorage.students?.length > 1) {
   studentsList = JSON.parse(localStorage.students);
 }
 
@@ -112,7 +112,6 @@ function clearFields() {
 
 //this function rcreate the whole table body in every change happens to the data like add edit set attendance etc.
 function renderList() {
-  locStorage();
   const e = document.getElementById("tb");
   const tf = document.getElementById("tf");//tf for tabel footer
   e.innerHTML = "";
@@ -123,14 +122,18 @@ function renderList() {
   for (let i = 0; i <= studentsList.length; i++) {
     let newItm = "";
     //the predefined list-->
-    if (studentsList.length === 0) {
-      for (let i = 0; i < 7; i++) {
-        const student = { id: 123, firstName: "ahmad", lastName: "saeed", attendance: "none" };
+    if (studentsList.length === 1) {
+      for (let j = 0; j < 7; j++) {
+        const student = {
+          id: generateRandom(181000, 211999),
+          firstName: randomNames[generateRandom(0, 9)], lastName: randomNames[generateRandom(0, 9)],
+          attendance: "none"
+        };
         student.id = generateRandom(181000, 211999);
         student.firstName = randomNames[generateRandom(0, 9)];
         student.lastName = randomNames[generateRandom(0, 9)];
         student.attendance = "none";
-        studentsList[i] = student;
+        studentsList[j] = student;
       }
     }
     if (studentsList[i]?.attendance === "none") {
@@ -261,6 +264,7 @@ function renderList() {
   </tr>`;
     tf.innerHTML = newStat;
   }
+  locStorage();
 }
 //function to add a new student when click on save button inside popup box
 function addRecord() {
@@ -307,7 +311,7 @@ function takAttendanceAbsent(index) {
 }
 //to empty studentsList when click on clear button
 function emptyArray() {
-  studentsList.splice(7, studentsList.length - 7);
+  studentsList.splice(0, studentsList.length);
   renderList();
 }
 //reset all attendance state to none when click on Reset attendance button
