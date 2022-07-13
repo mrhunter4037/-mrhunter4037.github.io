@@ -1,4 +1,4 @@
-let studentsList = [];
+let studentsList = [{ id: 123, firstName: "ahmad", lastName: "saeed", attendance: "none" }];
 if (localStorage.students.length > 1) {
   studentsList = JSON.parse(localStorage.students);
 }
@@ -18,10 +18,15 @@ day.innerHTML = `<h1>Attendance for ${d1}/${d2}/${d3}</h1>`;
 function showForm() {
   const e = document.getElementById("popup-wrapper");
   e.style.display = "flex";
+  document.documentElement.scrollTop = 0;
+  let f = document.getElementById("body");
+  f.style.overflow = "hidden";
 }
 function hideForm() {
   const e = document.getElementById("popup-wrapper");
   e.style.display = "none";
+  let f = document.getElementById("body");
+  f.style.overflow = "auto";
 }
 /* next three functions editForm & editForm2 & editForm3 is active in row edit routine*/
 function editForm(index) {
@@ -104,17 +109,6 @@ function clearFields() {
 }
 
 //this function rcreate the whole table body in every change happens to the data like add edit set attendance etc.
-//the predefined list-->
-if (studentsList.length === 0) {
-  for (let i = 0; i < 4; i++) {
-    const student = { id: 123, firstName: "ahmad", lastName: "saeed", attendance: "none" };
-    student.id = generateRandom(181000, 211999);
-    student.firstName = randomNames[generateRandom(0, 9)];
-    student.lastName = randomNames[generateRandom(0, 9)];
-    student.attendance = "none";
-    studentsList[i] = student;
-  }
-}
 function renderList() {
   locStorage();
   const e = document.getElementById("tb");
@@ -124,9 +118,20 @@ function renderList() {
   let pCount = 0; //statistics counters
   let aCount = 0;
   let lCount = 0;
-  for (let i = 4; i <= studentsList.length; i++) {
+  for (let i = 0; i <= studentsList.length; i++) {
     let newItm = "";
-    if (studentsList[i].attendance === "none") {
+    //the predefined list-->
+    if (studentsList.length === 0) {
+      for (let i = 0; i < 7; i++) {
+        const student = { id: 123, firstName: "ahmad", lastName: "saeed", attendance: "none" };
+        student.id = generateRandom(181000, 211999);
+        student.firstName = randomNames[generateRandom(0, 9)];
+        student.lastName = randomNames[generateRandom(0, 9)];
+        student.attendance = "none";
+        studentsList[i] = student;
+      }
+    }
+    if (studentsList[i]?.attendance === "none") {
       newItm =
         `<tr>
             <td>${i + 1} <div class="edit" onclick="editForm(${i})" title="Edit"></div></td>
@@ -151,7 +156,7 @@ function renderList() {
         </tr>
       `;
     }
-    if (studentsList[i].attendance === "present") {
+    if (studentsList[i]?.attendance === "present") {
       newItm = `
       <tr>
         <td class="present">${i + 1} <div class="edit" onclick="editForm(${i})" title="Edit"></div></td>
@@ -180,7 +185,7 @@ function renderList() {
       </tr>`;
       pCount += 1;
     }
-    if (studentsList[i].attendance === "absent") {
+    if (studentsList[i]?.attendance === "absent") {
       newItm = `
         <tr>
           <td class="absent">${i + 1} <div class="edit" onclick="editForm(${i})" title="Edit"></div></td>
@@ -212,7 +217,7 @@ function renderList() {
       `;
       aCount += 1;
     }
-    if (studentsList[i].attendance === "late") {
+    if (studentsList[i]?.attendance === "late") {
       newItm = `
         <tr>
           <td class="late">${i + 1} <div class="edit" onclick="editForm(${i})" title="Edit"></div></td>
