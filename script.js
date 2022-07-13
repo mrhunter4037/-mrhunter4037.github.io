@@ -104,6 +104,17 @@ function clearFields() {
 }
 
 //this function rcreate the whole table body in every change happens to the data like add edit set attendance etc.
+//the predefined list-->
+if (studentsList.length === 0) {
+  for (let i = 0; i < 4; i++) {
+    const student = { id: 123, firstName: "ahmad", lastName: "saeed", attendance: "none" };
+    student.id = generateRandom(181000, 211999);
+    student.firstName = randomNames[generateRandom(0, 9)];
+    student.lastName = randomNames[generateRandom(0, 9)];
+    student.attendance = "none";
+    studentsList[i] = student;
+  }
+}
 function renderList() {
   locStorage();
   const e = document.getElementById("tb");
@@ -113,19 +124,8 @@ function renderList() {
   let pCount = 0; //statistics counters
   let aCount = 0;
   let lCount = 0;
-  for (let i = 0; i <= studentsList.length; i++) {
+  for (let i = 4; i <= studentsList.length; i++) {
     let newItm = "";
-    //the predefined list-->
-    if (studentsList.length === 0) {
-      for (let i = 0; i < 4; i++) {
-        const student = { id: 123, firstName: "ahmad", lastName: "saeed", attendance: "none" };
-        student.id = generateRandom(181000, 211999);
-        student.firstName = randomNames[generateRandom(0, 9)];
-        student.lastName = randomNames[generateRandom(0, 9)];
-        student.attendance = "none";
-        studentsList[i] = student;
-      }
-    }
     if (studentsList[i].attendance === "none") {
       newItm =
         `<tr>
