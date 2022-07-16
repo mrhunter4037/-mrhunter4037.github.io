@@ -8,12 +8,12 @@ body {
   justify-content: space-around;
   align-items: center;
   margin: 0%;
-  overflow: hidden;
+  overflow-x: auto;
 }
 
 /*to make the table scrollable*/
 .tableWrap {
-  height: 67.2vh;
+  height: 85vh;
   overflow: auto;
 }
 
@@ -96,14 +96,15 @@ table {
 
 /*the outer wrapper for popup adding or editing student box*/
 .popup-wrapper {
+  display: none;
   position: absolute;
   width: 100%;
   height: 100%;
-  top: 0%;
+  top: 0;
+  bottom: -30%;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
-  display: none;
   z-index: 3;
 }
 
@@ -140,17 +141,8 @@ table {
   margin-bottom: 10px;
 }
 
-/*close button on top left in popup box*/
-.close-btn {
-  position: absolute;
-  font-size: 18px;
-  top: 15px;
-  right: 15px;
-  cursor: pointer;
-  color: gray;
-}
 
-/*all other buttons styling*/
+/*all buttons styling*/
 .btn {
   display: inline-block;
   border: none;
@@ -169,6 +161,7 @@ table {
   box-shadow: none;
 }
 
+
 /*edit icon in the Num column*/
 .edit {
   position: absolute;
@@ -176,12 +169,28 @@ table {
   left: 1px;
   width: 24px;
   height: 23px;
-  background-image: url("assets/1000_F_338462346_wZZhUA9S6daekMfyuF8cBssJgj4nao8M.jpg");
+  background-image: url("images/editImage.jpg");
   background-position: center;
   background-size: cover;
   cursor: pointer;
 }
 
 .edit:active {
+  transform: scale(0.9);
+}
+
+.refresh {
+  position: absolute;
+  top: 5px;
+  left: 1px;
+  width: 24px;
+  height: 23px;
+  background-image: url("images/refresh.svg");
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.refresh:active {
   transform: scale(0.9);
 }
