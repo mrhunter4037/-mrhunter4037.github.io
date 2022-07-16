@@ -386,4 +386,3 @@ const handleFiles = () => {
   const selectedFiles = [...fileInput.files];
   console.log(selectedFiles);
 }
-fileInput.addEventListener("change", handleFiles);
