@@ -6,6 +6,8 @@ if (localStorage.students?.length > 1) {
 /*random names for the predefined list*/
 let randomNames = ['Liam', 'Noah', 'Oliver', 'Elijah', 'James',
   'William', 'Benj', 'Lucas', 'Henry', 'Theodore'];
+
+
 renderList();
 hideForm();
 
@@ -32,8 +34,6 @@ function hideForm() {
 }
 /* next three functions editForm & editForm2 & editForm3 is active in row edit routine*/
 function editForm(index) {
-  const a = document.getElementById("close-btn");
-  a.style.display = "none";
   const newId = document.getElementById("student-id");
   const fName = document.getElementById("student-first-name");
   const lName = document.getElementById("student-last-name");
@@ -42,20 +42,18 @@ function editForm(index) {
   lName.value = studentsList[index].lastName;
   const e = document.getElementById("inp");
   e.innerHTML = `
-  <input type="button" name="form-clr-btn"
+  <input type="button" name="form-sv-btn"
   id="form-edit-btn" value="Save edit" class="btn" onclick="editForm2(${index})">
 
   <input type="button" name="form-clr-btn" id="form-edit-btn"
-  value="Cancel" class="btn" onclick="editForm3()">
+  value="Cancel" class="btn" onclick="editForm3(),hideForm()">
 
   <input type="button" name="st-del-btn"id="form-del-btn" value="Remove student" class="btn" 
-  ondblclick="deleteRecord(${index})"style="color: white; background-color: red;"">`
+  onclick="deleteRecord(${index})"style="color: white; background-color: red;"">`
   showForm();
 }
 
 function editForm2(index) {
-  const a = document.getElementById("close-btn");
-  a.style.display = "flex";
   const newId = document.getElementById("student-id");
   const fName = document.getElementById("student-first-name");
   const lName = document.getElementById("student-last-name");
@@ -63,7 +61,6 @@ function editForm2(index) {
     studentsList[index].id = newId.value;
     studentsList[index].firstName = fName.value;
     studentsList[index].lastName = lName.value;
-    studentsList[index].attendance = "none";
   }
   else {
     alert("Please Fill all fields");
@@ -77,29 +74,22 @@ function editForm2(index) {
   e.innerHTML = `<input type="button" name="form-sub-btn" 
   id="form-sub-btn" value="Save" onclick="addRecord()" class="btn">
 
-  <input type="button" name="form-clr-btn" id="form-clr-btn" value="Clear" class="btn">`
+  <input type="button" name="form-clr-btn" id="form-clr-btn" value="Cancel" class="btn" onclick="hideForm()">`
   hideForm();
   locStorage();
   renderList();
 
 }
 function editForm3() {
-  const a = document.getElementById("close-btn");
-  a.style.display = "flex";
-  const newId = document.getElementById("student-id");
-  const fName = document.getElementById("student-first-name");
-  const lName = document.getElementById("student-last-name");
-  newId.value = "";
-  fName.value = "";
-  lName.value = "";
+  clearFields();
   const e = document.getElementById("inp");
   e.innerHTML = `<input type="button" name="form-sub-btn" 
   id="form-sub-btn" value="Save" onclick="addRecord()" class="btn">
 
-  <input type="button" name="form-clr-btn" id="form-clr-btn" value="Clear" class="btn" onclick="clearFields()">`
+  <input type="button" name="form-clr-btn" id="form-clr-btn" value="Cancel" class="btn" onclick="hideForm()">`
   hideForm();
-  renderList();
 }
+
 //to clear form fields after click on clear button
 function clearFields() {
   const newId = document.getElementById("student-id");
@@ -121,8 +111,18 @@ function renderList() {
   let lCount = 0;
   for (let i = 0; i <= studentsList.length; i++) {
     let newItm = "";
+    if(studentsList.length===0){
+      newItm = `<tr>
+        <td colspan="6" style="color: Green; font-weight:bold; opacity:50%;">
+          <span style="font-size:26px; color: black;">No students added</span><br>
+          Hint: if you want to set the predefined list again<br>
+          add first student with id= 123
+        </td>
+      </tr>`;
+    }
+    
     //the predefined list-->
-    if (studentsList.length === 1 || studentsList.length === 0) {
+    if (studentsList.length === 1 && studentsList[0]?.id == 123) {
       for (let j = 0; j < 7; j++) {
         const student = {
           id: generateRandom(181000, 211999),
@@ -139,7 +139,8 @@ function renderList() {
     if (studentsList[i]?.attendance === "none") {
       newItm =
         `<tr>
-            <td>${i + 1} <div class="edit" onclick="editForm(${i})" title="Edit"></div></td>
+            <td>${i + 1} <div class="edit" onclick="editForm(${i})" title="Edit"></div>
+            <div class="refresh" onclick="resetRowAttendance(${i})" title="Reset attendance"></div></td>
             <td>${studentsList[i].id}</td>
             <td>${studentsList[i].firstName} ${studentsList[i].lastName}</td>
             <td>
@@ -164,7 +165,8 @@ function renderList() {
     if (studentsList[i]?.attendance === "present") {
       newItm = `
       <tr>
-        <td class="present">${i + 1} <div class="edit" onclick="editForm(${i})" title="Edit"></div></td>
+        <td class="present">${i + 1} <div class="edit" onclick="editForm(${i})" title="Edit"></div>
+        <div class="refresh" onclick="resetRowAttendance(${i})" title="Reset attendance"></div></td>
         <td class="present">${studentsList[i].id}</td>
         <td class="present">${studentsList[i].firstName} ${studentsList[i].lastName}</td> 
         <td class="present">
@@ -193,7 +195,8 @@ function renderList() {
     if (studentsList[i]?.attendance === "absent") {
       newItm = `
         <tr>
-          <td class="absent">${i + 1} <div class="edit" onclick="editForm(${i})" title="Edit"></div></td>
+          <td class="absent">${i + 1} <div class="edit" onclick="editForm(${i})" title="Edit"></div>
+          <div class="refresh" onclick="resetRowAttendance(${i})" title="Reset attendance"></div></td>
           <td class="absent">${studentsList[i].id}</td>
           <td class="absent">${studentsList[i].firstName} ${studentsList[i].lastName}</td>
           <td class="absent">
@@ -225,7 +228,8 @@ function renderList() {
     if (studentsList[i]?.attendance === "late") {
       newItm = `
         <tr>
-          <td class="late">${i + 1} <div class="edit" onclick="editForm(${i})" title="Edit"></div></td>
+          <td class="late">${i + 1} <div class="edit" onclick="editForm(${i})" title="Edit"></div>
+          <div class="refresh" onclick="resetRowAttendance(${i})" title="Reset attendance"></div></td>
           <td class="late">${studentsList[i].id}</td>
           <td class="late">${studentsList[i].firstName} ${studentsList[i].lastName}</td>
           <td class="late">
@@ -276,18 +280,15 @@ function addRecord() {
   student.firstName = fName.value;
   student.lastName = lName.value;
   student.attendance = "none";
-  lName.value = "";
-  fName.value = "";
-  newId.value = "";
   if (student.id !== "" && student.firstName !== "" && student.lastName !== "") {
     studentsList.push(student);
     hideForm();
     renderList();
+    clearFields();
   }
   else {
     alert("Please fill all fields");
   }
-
 }
 //deletes student when click on remove student button
 function deleteRecord(index) {
@@ -313,12 +314,18 @@ function takAttendanceAbsent(index) {
 function emptyArray() {
   studentsList.splice(0, studentsList.length);
   renderList();
+  // alert("HINT: if you want to set the predefined list again\n add first student with id= 123");
 }
 //reset all attendance state to none when click on Reset attendance button
 function resetAttendance() {
   for (let i = 0; i < studentsList.length; i++) {
     studentsList[i].attendance = "none";
   }
+  renderList();
+}
+//to reset attendance state for specefic student by clickin on refresh icon on left
+function resetRowAttendance(index) {
+  studentsList[index].attendance = "none";
   renderList();
 }
 //gives a random number between min and max values
@@ -374,4 +381,9 @@ function locStorage() {
   localStorage.students = JSON.stringify(studentsList);
 }
 
-
+const fileInput = document.getElementById('input');
+const handleFiles = () => {
+  const selectedFiles = [...fileInput.files];
+  console.log(selectedFiles);
+}
+fileInput.addEventListener("change", handleFiles);
