@@ -169,7 +169,7 @@ table {
   left: 1px;
   width: 24px;
   height: 23px;
-  background-image: url("images/editImage.jpg");
+  background-image: url("assets/editImage.jpg");
   background-position: center;
   background-size: cover;
   cursor: pointer;
@@ -185,7 +185,7 @@ table {
   left: 1px;
   width: 24px;
   height: 23px;
-  background-image: url("images/refresh.svg");
+  background-image: url("assets/refresh.svg");
   background-position: center;
   background-size: cover;
   cursor: pointer;
