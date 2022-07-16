@@ -36,8 +36,8 @@
     <div name="add-btn" id="add-btn" value="Add Student" onclick="showForm()" class="btn">Add Student
     </div>
     <div name="save-btn" id="save-btn" value="Save" class="btn" onclick="saveData()">Save</div>
-    <div onclick="emptyArray()" class="btn">Clear</div>
-    <div onclick="resetAttendance()" class="btn">Reset Attendance</div>
+    <div onclick="resetAttendance()" class="btn">Clear all</div>
+    <div onclick="emptyArray()" class="btn">Empty list</div>
   </div>
   <div class="popup-wrapper" id="popup-wrapper">
     <div class="inner-wrapper">
@@ -55,14 +55,19 @@
           <label for="student-last-name">Last Name</label>
           <input type="text" name="student-last-name" id="student-last-name" value="">
         </div>
+        <div>
+          <br>
+          <span style="color: Green; font-weight:900; font-size: 14px;">
+            You can add student without reset the Attendance state
+          </span>
+          <br>
+        </div>
         <div class="inp" id="inp">
           <input type="button" name="form-sub-btn" id="form-sub-btn" value="Save" onclick="addRecord()" class="btn">
-          <input type="button" name="form-clr-btn" id="form-clr-btn" value="Clear" class="btn" onclick="clearFields()">
+          <input type="button" name="form-clr-btn" id="form-clr-btn" value="Cancel" class="btn"
+            onclick="clearFields(),hideForm()">
         </div>
       </form>
-      <div class="close-btn" id="close-btn" onclick="hideForm()">
-        &#10060;
-      </div>
     </div>
   </div>
   <script src="script.js"></script>
