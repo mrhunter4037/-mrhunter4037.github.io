@@ -350,7 +350,7 @@ function saveData() {
 
 function exportToCsv(filename, rows) {
   var processRow = function (row) {
-    var innerValue = row.id + ";" + row.firstName + ";" + row.lastName + ";" + row.attendance + "\n";
+    var innerValue = row.id + "," + row.firstName + "," + row.lastName + "," + row.attendance + "\n";
     return innerValue;
   };
 
@@ -379,10 +379,4 @@ function exportToCsv(filename, rows) {
 //to store studentsList to localStorage
 function locStorage() {
   localStorage.students = JSON.stringify(studentsList);
-}
-
-const fileInput = document.getElementById('input');
-const handleFiles = () => {
-  const selectedFiles = [...fileInput.files];
-  console.log(selectedFiles);
 }
